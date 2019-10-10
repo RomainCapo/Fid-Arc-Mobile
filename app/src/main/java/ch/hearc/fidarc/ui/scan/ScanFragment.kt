@@ -1,4 +1,4 @@
-package ch.hearc.fidarc.ui.dashboard
+package ch.hearc.fidarc.ui.scan
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -10,20 +10,20 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import ch.hearc.fidarc.R
 
-class DashboardFragment : Fragment() {
+class ScanFragment : Fragment() {
 
-    private lateinit var dashboardViewModel: DashboardViewModel
+    private lateinit var scanViewModel: ScanViewModel
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        dashboardViewModel =
-            ViewModelProviders.of(this).get(DashboardViewModel::class.java)
-        val root = inflater.inflate(R.layout.fragment_dashboard, container, false)
-        val textView: TextView = root.findViewById(R.id.text_dashboard)
-        dashboardViewModel.text.observe(this, Observer {
+        scanViewModel =
+            ViewModelProviders.of(this).get(ScanViewModel::class.java)
+        val root = inflater.inflate(R.layout.fragment_scan, container, false)
+        val textView: TextView = root.findViewById(R.id.text_scan)
+        scanViewModel.text.observe(this, Observer {
             textView.text = it
         })
         return root

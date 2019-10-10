@@ -1,4 +1,4 @@
-package ch.hearc.fidarc.ui.home
+package ch.hearc.fidarc.ui.maps
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -10,20 +10,20 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import ch.hearc.fidarc.R
 
-class HomeFragment : Fragment() {
+class MapsFragment : Fragment() {
 
-    private lateinit var homeViewModel: HomeViewModel
+    private lateinit var mapsViewModel: MapsViewModel
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        homeViewModel =
-            ViewModelProviders.of(this).get(HomeViewModel::class.java)
-        val root = inflater.inflate(R.layout.fragment_home, container, false)
-        val textView: TextView = root.findViewById(R.id.text_home)
-        homeViewModel.text.observe(this, Observer {
+        mapsViewModel =
+            ViewModelProviders.of(this).get(MapsViewModel::class.java)
+        val root = inflater.inflate(R.layout.fragment_maps, container, false)
+        val textView: TextView = root.findViewById(R.id.text_maps)
+        mapsViewModel.text.observe(this, Observer {
             textView.text = it
         })
         return root
