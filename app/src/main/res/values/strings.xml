@@ -3,4 +3,10 @@
     <string name="title_account">Account</string>
     <string name="title_maps">Maps</string>
     <string name="title_scan">Scan</string>
+    <string name="account_text">Your account</string>
+    <string name="text_first_name">First name</string>
+    <string name="text_last_name">Last name</string>
+    <string name="text_email">Email</string>
+    <string name="text_log_out">Log out</string>
+    <string name="text_fidelity_cards">Your fidelity cards</string>
 </resources>
