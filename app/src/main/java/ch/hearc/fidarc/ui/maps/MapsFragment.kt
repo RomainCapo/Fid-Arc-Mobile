@@ -9,23 +9,28 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import ch.hearc.fidarc.R
+import com.google.android.gms.maps.SupportMapFragment
+import com.google.android.gms.maps.CameraUpdateFactory
+import com.google.android.gms.maps.GoogleMap
+import com.google.android.gms.maps.OnMapReadyCallback
+import com.google.android.gms.maps.model.LatLng
+import com.google.android.gms.maps.model.MarkerOptions
 
-class MapsFragment : Fragment() {
+class MapsFragment : Fragment(), OnMapReadyCallback {
 
-    private lateinit var mapsViewModel: MapsViewModel
+    private lateinit var mMap: GoogleMap
 
-    override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        mapsViewModel =
-            ViewModelProviders.of(this).get(MapsViewModel::class.java)
-        val root = inflater.inflate(R.layout.fragment_maps, container, false)
-        val textView: TextView = root.findViewById(R.id.text_maps)
-        mapsViewModel.text.observe(this, Observer {
-            textView.text = it
-        })
-        return root
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+        return inflater.inflate(R.layout.fragment_maps, container, false)
     }
-}
+
+    override fun onActivityCreated(savedInstanceState: Bundle?) {
+        super.onActivityCreated(savedInstanceState)
+        var mapFrag = childFragmentManager.findFragmentById(R.id.map) as SupportMapFragment
+        mapFrag.getMapAsync(this)
+    }
+
+    override fun onMapReady(googleMap: GoogleMap) {
+        mMap = googleMap
+        }
+    }
