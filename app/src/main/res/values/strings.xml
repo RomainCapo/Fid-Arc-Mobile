@@ -3,4 +3,5 @@
     <string name="title_account">Account</string>
     <string name="title_maps">Maps</string>
     <string name="title_scan">Scan</string>
+    <string name="map_text">You can find our partners on the map !</string>
 </resources>
