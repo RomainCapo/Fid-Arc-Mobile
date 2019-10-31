@@ -1,5 +1,6 @@
 package ch.hearc.fidarc.ui.account
 
+import android.os.AsyncTask
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -17,6 +18,7 @@ import kotlinx.android.synthetic.main.fidelity_card_list_row.view.*
 import kotlinx.android.synthetic.main.fragment_account.view.*
 import org.json.JSONArray
 import java.net.URL
+import java.util.concurrent.Executors
 
 class AccountFragment : Fragment() {
     private var fidelityCardList = ArrayList<FidelityCard>()
@@ -35,35 +37,34 @@ class AccountFragment : Fragment() {
 
         prepareAccountFragmentData(accountView)
 
-
         return accountView
     }
 
-    private fun prepareAccountFragmentData(view:View){
-        var fidelityCard = FidelityCard("McDo", 3,10)
+
+    private fun prepareAccountFragmentData(view:View) {
+        var fidelityCard = FidelityCard("McDo", 3, 10)
         fidelityCardList.add(fidelityCard)
 
-        fidelityCard = FidelityCard("KingFood", 5,12)
+        fidelityCard = FidelityCard("KingFood", 5, 12)
         fidelityCardList.add(fidelityCard)
 
-        fidelityCard = FidelityCard("McDo2", 4,5)
+        fidelityCard = FidelityCard("McDo2", 4, 5)
         fidelityCardList.add(fidelityCard)
 
-        fidelityCard = FidelityCard("McDo3", 5,12)
+        fidelityCard = FidelityCard("McDo3", 5, 12)
         fidelityCardList.add(fidelityCard)
 
 
+        val url = "http://10.0.2.2:8000/testApiMobile/userAccount.php"
 
-        /*val url = "http://10.0.2.2/testApiMobile/userAccount.php"
-        var jsonArray = JSONArray(URL(url).readText())
+        Executors.newSingleThreadExecutor().execute {
 
-        for(jsonIndex in 0..(jsonArray.length()-1)){
-            view.text_account_first_name.text = jsonArray.getJSONObject(jsonIndex).getString("first_name")
-            view.text_account_last_name.text = jsonArray.getJSONObject(jsonIndex).getString("last_name")
-            view.text_account_email.text = jsonArray.getJSONObject(jsonIndex).getString("email_name")
+            var jsonArray = JSONArray(URL(url).readText())
 
-            Log.d("json", jsonArray.getJSONObject(jsonIndex).getString("fidelity_cards"))
-        }*/
+
+            view.text_account_first_name.text = jsonArray.getJSONObject(0).getString("first_name")
+            view.text_account_last_name.text = jsonArray.getJSONObject(0).getString("last_name")
+            view.text_account_email.text = jsonArray.getJSONObject(0).getString("email")
+        }
     }
-
 }
