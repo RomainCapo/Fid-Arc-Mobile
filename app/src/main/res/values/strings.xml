@@ -4,4 +4,12 @@
     <string name="title_maps">Maps</string>
     <string name="title_scan">Scan</string>
     <string name="map_text">You can find our partners on the map !</string>
+    <string name="account_text">Your account</string>
+    <string name="text_first_name">First name</string>
+    <string name="text_last_name">Last name</string>
+    <string name="text_email">Email</string>
+    <string name="text_log_out">Log out</string>
+    <string name="text_fidelity_cards">Your fidelity cards</string>
+    <string name="company_name">Company Name</string>
+    <string name="number_of_points">Number of points :  </string>
 </resources>

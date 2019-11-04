@@ -1,29 +1,13 @@
-package ch.hearc.fidarc.ui.maps
+package ch.hearc.fidarc.ui.client.maps
 
-import android.Manifest
-import android.app.DownloadManager
-import android.content.Context.LOCATION_SERVICE
-import android.content.pm.PackageManager
-import android.location.Location
-import android.location.LocationManager
-import android.os.Build
 import android.os.Bundle
-import android.os.Looper
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.TextView
 import android.widget.Toast
-import androidx.core.app.ActivityCompat
-import androidx.core.content.ContextCompat
-import androidx.core.content.ContextCompat.getSystemService
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProviders
 import ch.hearc.fidarc.R
 import com.birjuvachhani.locus.Locus
-import com.google.android.gms.location.*
 import com.google.android.gms.maps.SupportMapFragment
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
@@ -34,19 +18,16 @@ import com.google.android.gms.maps.model.MarkerOptions
 import org.json.JSONArray
 import java.net.URL
 import java.util.concurrent.Executors
-import com.google.android.gms.maps.model.BitmapDescriptor;
 import com.google.android.gms.maps.model.BitmapDescriptorFactory;
-import java.util.concurrent.ScheduledExecutorService
-import java.util.concurrent.TimeUnit
 
-class MapsFragment : Fragment(), OnMapReadyCallback{
+class MapsFragmentUser : Fragment(), OnMapReadyCallback{
 
     private lateinit var mMap: GoogleMap
     private lateinit var currentUserMarker: Marker
 
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        var mapView = inflater.inflate(R.layout.fragment_maps, container, false)
+        var mapView = inflater.inflate(R.layout.fragment_maps_user, container, false)
         var mapFrag = childFragmentManager.findFragmentById(R.id.map) as SupportMapFragment
         mapFrag.getMapAsync(this)
 

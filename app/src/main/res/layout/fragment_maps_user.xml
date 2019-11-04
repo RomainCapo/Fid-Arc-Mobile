@@ -5,12 +5,15 @@
     android:orientation="vertical" >
 
     <TextView
-        android:id="@+id/map_text"
+        android:id="@+id/map_text_user"
         android:layout_height="wrap_content"
         android:layout_width="wrap_content"
         android:text="@string/map_text"
-        android:textSize="22dp"
-        android:gravity="center"/>
+        android:textSize="26dp"
+        android:textStyle="bold"
+        android:gravity="center"
+        android:layout_marginBottom="20dp"
+        android:layout_marginTop="10dp"/>
 
     <fragment
         android:id="@+id/map"
