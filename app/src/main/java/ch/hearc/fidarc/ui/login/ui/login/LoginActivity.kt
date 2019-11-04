@@ -15,7 +15,7 @@ import android.widget.EditText
 import android.widget.ProgressBar
 import android.widget.Toast
 
-import ch.hearc.fidarc.ui.login.R
+import ch.hearc.fidarc.R
 
 class LoginActivity : AppCompatActivity() {
 

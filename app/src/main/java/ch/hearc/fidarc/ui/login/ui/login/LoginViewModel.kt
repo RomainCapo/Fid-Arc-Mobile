@@ -7,7 +7,7 @@ import android.util.Patterns
 import ch.hearc.fidarc.ui.login.data.LoginRepository
 import ch.hearc.fidarc.ui.login.data.Result
 
-import ch.hearc.fidarc.ui.login.R
+import ch.hearc.fidarc.R
 
 class LoginViewModel(private val loginRepository: LoginRepository) : ViewModel() {
 
