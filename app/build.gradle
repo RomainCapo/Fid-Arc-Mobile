@@ -38,6 +38,7 @@ dependencies {
     implementation 'androidx.annotation:annotation:1.0.2'
     implementation "com.squareup.retrofit2:retrofit: $version_retrofit"
     implementation "com.squareup.retrofit2:converter-scalars:$version_retrofit"
+    implementation "com.squareup.retrofit2:converter-moshi:$version_retrofit"
     implementation 'com.squareup.moshi:moshi:1.9.1'
     implementation 'com.squareup.moshi:moshi-kotlin:1.9.1'
     testImplementation 'junit:junit:4.12'
