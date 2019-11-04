@@ -1,6 +1,9 @@
 package ch.hearc.fidarc.ui.data
 
 import ch.hearc.fidarc.ui.data.model.LoggedInUser
+import ch.hearc.fidarc.ui.network.FidarcAPI
+import ch.hearc.fidarc.ui.network.FidarcAPIService
+import retrofit2.Retrofit
 
 /**
  * Class that requests authentication and user information from the remote data source and
@@ -27,7 +30,7 @@ class LoginRepository(val dataSource: LoginDataSource) {
         dataSource.logout()
     }
 
-    fun login(username: String, password: String): Result<LoggedInUser> {
+    suspend fun login(username: String, password: String): Result<LoggedInUser> {
         // handle login
         val result = dataSource.login(username, password)
 

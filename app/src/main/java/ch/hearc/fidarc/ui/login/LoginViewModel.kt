@@ -1,15 +1,25 @@
 package ch.hearc.fidarc.ui.login
 
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import android.util.Patterns
+import androidx.lifecycle.viewModelScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.SupervisorJob
 import ch.hearc.fidarc.ui.data.LoginRepository
-import ch.hearc.fidarc.ui.data.Result
 
 import ch.hearc.fidarc.R
+import ch.hearc.fidarc.ui.network.FidarcAPI
+import ch.hearc.fidarc.ui.network.FidarcAPIService
+import kotlinx.coroutines.launch
 
 class LoginViewModel(private val loginRepository: LoginRepository) : ViewModel() {
+
+    private val job = SupervisorJob()
+    private val coroutineContext = Dispatchers.IO + job
+    var client: FidarcAPIService = FidarcAPI.retrofitService
 
     private val _loginForm = MutableLiveData<LoginFormState>()
     val loginFormState: LiveData<LoginFormState> = _loginForm
@@ -19,7 +29,7 @@ class LoginViewModel(private val loginRepository: LoginRepository) : ViewModel()
 
     fun login(username: String, password: String) {
         // can be launched in a separate asynchronous job
-        val result = loginRepository.login(username, password)
+        /*val result = loginRepository.login(username, password)
 
         if (result is Result.Success) {
             _loginResult.value =
@@ -30,6 +40,10 @@ class LoginViewModel(private val loginRepository: LoginRepository) : ViewModel()
                 )
         } else {
             _loginResult.value = LoginResult(error = R.string.login_failed)
+        }*/
+        viewModelScope.launch(coroutineContext) {
+            val test = client.getTest(1)
+            Log.v("FROMAGE", test.title)
         }
     }
 

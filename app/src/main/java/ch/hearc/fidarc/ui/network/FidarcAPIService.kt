@@ -8,6 +8,7 @@ import retrofit2.http.GET
 import retrofit2.http.Path
 
 import ch.hearc.fidarc.ui.data.model.Test
+import retrofit2.Call
 
 private const val BASE_URL = "https://jsonplaceholder.typicode.com/" //TODO : Remove this with the good api
 
@@ -23,7 +24,7 @@ private val retrofit = Retrofit.Builder()
 interface FidarcAPIService {
 
     @GET("/todos/{id}")
-    fun getTest(@Path(value = "id") todoId: Int): Test
+    suspend  fun getTest(@Path(value = "id") todoId: Int): Test
 }
 
 object FidarcAPI {

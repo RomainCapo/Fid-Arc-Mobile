@@ -5,17 +5,15 @@ import ch.hearc.fidarc.ui.network.FidarcAPI
 import java.io.IOException
 
 import android.util.Log
+import ch.hearc.fidarc.ui.network.FidarcAPIService
 
 /**
  * Class that handles authentication w/ login credentials and retrieves user information.
  */
 class LoginDataSource {
 
-    fun login(username: String, password: String): Result<LoggedInUser> {
+    suspend fun login(username: String, password: String): Result<LoggedInUser> {
         try {
-            var client = FidarcAPI.retrofitService.getTest(1)
-            Log.v("FIDARC", client.title)
-
             val fakeUser = LoggedInUser(java.util.UUID.randomUUID().toString(), "Jane Doe", "company", "test")
             return Result.Success(fakeUser)
         } catch (e: Throwable) {
