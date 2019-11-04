@@ -1,4 +1,4 @@
-package ch.hearc.fidarc.ui.login.ui.login
+package ch.hearc.fidarc.ui.login
 
 /**
  * Data validation state of the login form.

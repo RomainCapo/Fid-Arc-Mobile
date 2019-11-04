@@ -1,4 +1,4 @@
-package ch.hearc.fidarc.ui.login.data.model
+package ch.hearc.fidarc.ui.data.model
 
 data class Test(
     val id: Int = 0,

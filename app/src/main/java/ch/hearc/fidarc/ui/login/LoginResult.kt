@@ -1,4 +1,4 @@
-package ch.hearc.fidarc.ui.login.ui.login
+package ch.hearc.fidarc.ui.login
 
 /**
  * Authentication result : success (user details) or error message.

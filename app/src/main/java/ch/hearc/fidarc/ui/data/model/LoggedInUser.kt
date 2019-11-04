@@ -1,4 +1,4 @@
-package ch.hearc.fidarc.ui.login.data.model
+package ch.hearc.fidarc.ui.data.model
 
 /**
  * Data class that captures user information for logged in users retrieved from LoginRepository

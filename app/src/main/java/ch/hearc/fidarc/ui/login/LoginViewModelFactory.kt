@@ -1,9 +1,9 @@
-package ch.hearc.fidarc.ui.login.ui.login
+package ch.hearc.fidarc.ui.login
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
-import ch.hearc.fidarc.ui.login.data.LoginDataSource
-import ch.hearc.fidarc.ui.login.data.LoginRepository
+import ch.hearc.fidarc.ui.data.LoginDataSource
+import ch.hearc.fidarc.ui.data.LoginRepository
 
 /**
  * ViewModel provider factory to instantiate LoginViewModel.

@@ -1,6 +1,6 @@
-package ch.hearc.fidarc.ui.login.data
+package ch.hearc.fidarc.ui.data
 
-import ch.hearc.fidarc.ui.login.data.model.LoggedInUser
+import ch.hearc.fidarc.ui.data.model.LoggedInUser
 
 /**
  * Class that requests authentication and user information from the remote data source and

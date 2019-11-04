@@ -1,4 +1,4 @@
-package ch.hearc.fidarc.ui.login.data
+package ch.hearc.fidarc.ui.data
 
 /**
  * A generic class that holds a value with its loading status.
