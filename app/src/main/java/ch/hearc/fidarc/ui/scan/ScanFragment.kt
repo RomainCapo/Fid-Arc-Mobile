@@ -16,6 +16,7 @@ import com.google.zxing.BarcodeFormat
 import com.google.zxing.MultiFormatWriter
 import com.google.zxing.WriterException
 import com.google.zxing.common.BitMatrix
+import java.util.concurrent.Executors
 
 class ScanFragment : Fragment() {
 
@@ -24,21 +25,20 @@ class ScanFragment : Fragment() {
     private var bitmap: Bitmap? = null
     private var iv: ImageView? = null
 
-    override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        scanViewModel =
-            ViewModelProviders.of(this).get(ScanViewModel::class.java)
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+
+        scanViewModel = ViewModelProviders.of(this).get(ScanViewModel::class.java)
         val root = inflater.inflate(R.layout.fragment_scan, container, false)
+
         val textView: TextView = root.findViewById(R.id.text_scan)
-        scanViewModel.text.observe(this, Observer {
-            textView.text = it
-        })
+        scanViewModel.text.observe(this, Observer { textView.text = it })
+
+
+        /*Executors.newSingleThreadExecutor().execute {
+
+        }*/
 
         bitmap = textToImageEncode("Romain est une petite futée...")
-
         iv = root.findViewById(R.id.iv)
         iv!!.setImageBitmap(bitmap)
 
@@ -49,13 +49,8 @@ class ScanFragment : Fragment() {
     private fun textToImageEncode(Value: String): Bitmap? {
         val bitMatrix: BitMatrix
         try {
-            bitMatrix = MultiFormatWriter().encode(
-                Value,
-                BarcodeFormat.QR_CODE, 800, 800, null
-            )
-
+            bitMatrix = MultiFormatWriter().encode(Value, BarcodeFormat.QR_CODE, 800, 800, null)
         } catch (Illegalargumentexception: IllegalArgumentException) {
-
             return null
         }
 
