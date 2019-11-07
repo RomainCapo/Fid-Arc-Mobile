@@ -1,5 +1,6 @@
 package ch.hearc.fidarc.ui.data
 
+import ch.hearc.fidarc.BuildConfig
 import ch.hearc.fidarc.ui.data.model.User
 import ch.hearc.fidarc.ui.network.FidarcAPI
 import java.io.IOException
@@ -11,7 +12,7 @@ class LoginDataSource {
 
     suspend fun login(username: String, password: String): Result<User> {
         try {
-            val response = FidarcAPI.retrofitService.login("password", 1, "REPLACE_THIS", username, password)
+            val response = FidarcAPI.retrofitService.login(username = username, password = password)
             if(response.isSuccessful) {
                 val token = response.body()
                 val response =
