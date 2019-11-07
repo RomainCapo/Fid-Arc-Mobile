@@ -2,6 +2,7 @@ package ch.hearc.fidarc.ui.network
 
 import ch.hearc.fidarc.ui.data.model.Company
 import ch.hearc.fidarc.ui.data.model.CompanyCollection
+import ch.hearc.fidarc.ui.data.model.FidelityCardCollection
 import com.squareup.moshi.Moshi
 import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
 import retrofit2.Retrofit
@@ -30,6 +31,9 @@ interface FidarcAPIService {
 
     @GET("companies")
     suspend fun getCompaniesInfo(): CompanyCollection
+
+    @GET("fidelityCards/{user_id}")
+    suspend fun getFidelityCards(@Path(value = "user_id") user_id:Int): FidelityCardCollection
 }
 
 object FidarcAPI {

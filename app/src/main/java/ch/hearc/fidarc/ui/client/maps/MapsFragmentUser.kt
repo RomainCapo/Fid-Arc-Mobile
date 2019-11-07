@@ -24,8 +24,8 @@ class MapsFragmentUser : Fragment(), OnMapReadyCallback{
 
     private lateinit var mMap: GoogleMap
     private var currentUserMarker: Marker?=null
-    var isUserLocated=false
-    var client: FidarcAPIService = FidarcAPI.retrofitService
+    private var isUserLocated=false
+    private var client: FidarcAPIService = FidarcAPI.retrofitService
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         var mapView = inflater.inflate(R.layout.fragment_maps_user, container, false)
@@ -63,7 +63,7 @@ class MapsFragmentUser : Fragment(), OnMapReadyCallback{
 
     override fun onMapReady(googleMap: GoogleMap) {
         mMap = googleMap
-        
+
         Locus.startLocationUpdates(this) { result ->
             result.location?.let {
                 if(!isUserLocated){
