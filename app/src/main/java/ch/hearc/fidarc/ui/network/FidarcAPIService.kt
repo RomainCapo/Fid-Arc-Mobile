@@ -4,13 +4,12 @@ import com.squareup.moshi.Moshi
 import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
 import retrofit2.Retrofit
 import retrofit2.converter.moshi.MoshiConverterFactory
-import retrofit2.http.GET
-import retrofit2.http.Path
 
-import ch.hearc.fidarc.ui.data.model.Test
-import retrofit2.Call
+import ch.hearc.fidarc.ui.data.model.Token
+import ch.hearc.fidarc.ui.data.model.User
+import retrofit2.http.*
 
-private const val BASE_URL = "https://jsonplaceholder.typicode.com/" //TODO : Remove this with the good api
+private const val BASE_URL = "https://fidarc.srvz-webapp.he-arc.ch/"
 
 private val moshi = Moshi.Builder()
     .add(KotlinJsonAdapterFactory())
@@ -23,8 +22,16 @@ private val retrofit = Retrofit.Builder()
 
 interface FidarcAPIService {
 
-    @GET("/todos/{id}")
-    suspend  fun getTest(@Path(value = "id") todoId: Int): Test
+    @GET("/api/user")
+    suspend fun getUser(@Header("authorization") token: String): User
+
+    @FormUrlEncoded
+    @POST("/oauth/token")
+    suspend fun login(  @Field("grant_type") grantType: String,
+                        @Field("client_id") clientId: Int,
+                        @Field("client_secret") clientSecret: String,
+                        @Field("username") username: String,
+                        @Field("password") password: String): Token
 }
 
 object FidarcAPI {
