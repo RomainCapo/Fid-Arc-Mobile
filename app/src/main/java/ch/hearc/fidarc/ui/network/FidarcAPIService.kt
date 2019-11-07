@@ -1,5 +1,6 @@
 package ch.hearc.fidarc.ui.network
 
+import ch.hearc.fidarc.BuildConfig
 import com.squareup.moshi.Moshi
 import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
 import retrofit2.Retrofit
@@ -28,11 +29,11 @@ interface FidarcAPIService {
 
     @FormUrlEncoded
     @POST("/oauth/token")
-    suspend fun login(  @Field("grant_type") grantType: String,
-                        @Field("client_id") clientId: Int,
-                        @Field("client_secret") clientSecret: String,
-                        @Field("username") username: String,
-                        @Field("password") password: String): Response<Token>
+    suspend fun login(@Field("grant_type") grantType: String = "password",
+                      @Field("client_id") clientId: Int = 1,
+                      @Field("client_secret") clientSecret: String = BuildConfig.CLIENT_SECRET,
+                      @Field("username") username: String,
+                      @Field("password") password: String): Response<Token>
 }
 
 object FidarcAPI {
