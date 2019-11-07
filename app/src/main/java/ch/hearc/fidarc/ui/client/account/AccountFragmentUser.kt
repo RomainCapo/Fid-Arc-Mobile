@@ -47,7 +47,6 @@ class AccountFragmentUser : Fragment() {
         return accountView
     }
 
-
     private fun prepareAccountFragmentData(view:View) {
 
 

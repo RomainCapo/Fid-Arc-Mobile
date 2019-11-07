@@ -24,9 +24,9 @@ class FidelityCardAdapter(private val context: Context, val fidelityCardList:Lis
     @SuppressLint("SetTextI18n")
     override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
         val fidelityCard = fidelityCardList[position]
-        holder.companyName.text = fidelityCard.companyName
+        holder.companyName.text = fidelityCard.company_name
 
-        holder.nbFidelityPoints.text = context.resources.getString(R.string.number_of_points) + fidelityCard.currentNbOfPoints+"/"+fidelityCard.totalNbOfPoints
+        holder.nbFidelityPoints.text = context.resources.getString(R.string.number_of_points) + fidelityCard.current_number_of_points+"/"+fidelityCard.total_number_of_points
     }
 
     override fun getItemCount(): Int {
