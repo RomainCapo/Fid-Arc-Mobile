@@ -1,7 +1,6 @@
 package ch.hearc.fidarc.ui.client.maps
 
 import android.os.Bundle
-
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -24,7 +23,8 @@ import kotlinx.coroutines.*
 class MapsFragmentUser : Fragment(), OnMapReadyCallback{
 
     private lateinit var mMap: GoogleMap
-    private lateinit var currentUserMarker: Marker
+    private var currentUserMarker: Marker?=null
+    var isUserLocated=false
     var client: FidarcAPIService = FidarcAPI.retrofitService
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
@@ -56,20 +56,21 @@ class MapsFragmentUser : Fragment(), OnMapReadyCallback{
 
     private fun addUserLocation(latitude:Double, longitude:Double){
 
-        currentUserMarker.remove()
+        currentUserMarker?.remove()
 
         currentUserMarker = mMap.addMarker(MarkerOptions().position(LatLng(latitude,longitude)).icon(BitmapDescriptorFactory.fromResource(R.drawable.ic_navigation)))
     }
 
     override fun onMapReady(googleMap: GoogleMap) {
         mMap = googleMap
-
-        currentUserMarker = mMap.addMarker(MarkerOptions().position(LatLng(46.993742, 6.932406)).icon(BitmapDescriptorFactory.fromResource(R.drawable.ic_navigation)))//define a default location point
-
+        
         Locus.startLocationUpdates(this) { result ->
             result.location?.let {
+                if(!isUserLocated){
+                    mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(LatLng(it.latitude,it.longitude), 10.0f))
+                    isUserLocated=!isUserLocated
+                }
                 addUserLocation(it.latitude, it.longitude)
-                mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(LatLng(it.latitude,it.longitude), 10.0f))
             }
             result.error?.let { Toast.makeText(context!!, "Error with the geolocation", Toast.LENGTH_SHORT) }
         }
