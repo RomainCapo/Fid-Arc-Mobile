@@ -1,4 +1,4 @@
-package ch.hearc.fidarc.ui.scan
+package ch.hearc.fidarc.ui.client.scan
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -6,8 +6,6 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProviders
 import ch.hearc.fidarc.R
 
 import android.graphics.Bitmap
@@ -18,21 +16,18 @@ import com.google.zxing.WriterException
 import com.google.zxing.common.BitMatrix
 import java.util.concurrent.Executors
 
-class ScanFragment : Fragment() {
+class ScanFragmentUser : Fragment() {
 
-    private lateinit var scanViewModel: ScanViewModel
 
     private var bitmap: Bitmap? = null
     private var iv: ImageView? = null
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
 
-        scanViewModel = ViewModelProviders.of(this).get(ScanViewModel::class.java)
-        val root = inflater.inflate(R.layout.fragment_scan, container, false)
+        val root = inflater.inflate(R.layout.fragment_scan_user, container, false)
 
         val textView: TextView = root.findViewById(R.id.text_scan)
-        scanViewModel.text.observe(this, Observer { textView.text = it })
-
+        textView.text = resources.getString(R.string.text_qrCode_display)
 
         /*Executors.newSingleThreadExecutor().execute {
 
