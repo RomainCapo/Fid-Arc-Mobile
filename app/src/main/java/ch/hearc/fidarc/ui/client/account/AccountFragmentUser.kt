@@ -1,8 +1,6 @@
 package ch.hearc.fidarc.ui.client.account
 
 import android.os.Bundle
-import android.provider.Contacts
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -11,16 +9,12 @@ import androidx.recyclerview.widget.DefaultItemAnimator
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import ch.hearc.fidarc.R
+import ch.hearc.fidarc.ui.data.model.FidelityCard
 import ch.hearc.fidarc.ui.network.FidarcAPI
 import ch.hearc.fidarc.ui.network.FidarcAPIService
-import kotlinx.android.synthetic.main.fragment_account_user.view.*
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
-import org.json.JSONArray
-import java.net.URL
-import java.util.concurrent.Executors
 
 class AccountFragmentUser : Fragment() {
     private var fidelityCardList = ArrayList<FidelityCard>()

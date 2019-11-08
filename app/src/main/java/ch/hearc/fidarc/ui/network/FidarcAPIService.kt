@@ -13,7 +13,7 @@ import retrofit2.http.Path
 import ch.hearc.fidarc.ui.data.model.Test
 import retrofit2.Call
 
-private const val BASE_URL = "http://10.0.2.2:8000/Fid-Arc/public/api/" //TODO : Remove this with the good api
+private const val BASE_URL = "http://10.0.2.2:8000/Fid-Arc/public/" //TODO : Remove this with the good api
 
 private val moshi = Moshi.Builder()
     .add(KotlinJsonAdapterFactory())

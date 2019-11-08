@@ -8,6 +8,7 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import ch.hearc.fidarc.R
+import ch.hearc.fidarc.ui.data.model.FidelityCard
 
 class FidelityCardAdapter(private val context: Context, val fidelityCardList:List<FidelityCard>):RecyclerView.Adapter<FidelityCardAdapter.MyViewHolder>(){
     inner class MyViewHolder(view: View) : RecyclerView.ViewHolder(view) {
