@@ -13,7 +13,7 @@ import retrofit2.http.Path
 import ch.hearc.fidarc.ui.data.model.Test
 import retrofit2.Call
 
-private const val BASE_URL = "http://10.0.2.2:8000/Fid-Arc/public/" //TODO : Remove this with the good api
+private const val BASE_URL = "https://fidarc.srvz-webapp.he-arc.ch/api/" //TODO : Remove this with the good api
 
 private val moshi = Moshi.Builder()
     .add(KotlinJsonAdapterFactory())
@@ -32,8 +32,8 @@ interface FidarcAPIService {
     @GET("companies")
     suspend fun getCompaniesInfo(): CompanyCollection
 
-    @GET("fidelityCards/{user_id}")
-    suspend fun getFidelityCards(@Path(value = "user_id") user_id:Int): FidelityCardCollection
+    @GET("fidelityCards")
+    suspend fun getFidelityCards(): FidelityCardCollection
 }
 
 object FidarcAPI {

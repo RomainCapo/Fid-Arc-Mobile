@@ -36,21 +36,25 @@ class AccountFragmentUser : Fragment() {
         recyclerView?.itemAnimator = DefaultItemAnimator()
         recyclerView?.adapter = mAdapter
 
-        prepareAccountFragmentData(accountView)
+        loadClientData(accountView)
 
         return accountView
     }
 
-    private fun prepareAccountFragmentData(view:View) {
-
+    /**
+     * Load the fidelity card on the recycler view and add user info in view
+     *
+     * @param view current view
+     */
+    private fun loadClientData(view:View) {
 
         GlobalScope.launch(Dispatchers.Main) {
 
-            val fidelityCards = client.getFidelityCards(2).data
+            val fidelityCards = client.getFidelityCards().data // Read the data from the API
                 fidelityCards.forEach {
                     fidelityCardList.add(it)
             }
-            mAdapter?.notifyDataSetChanged()
+            mAdapter?.notifyDataSetChanged()//update the adapter data
         }
 
         /*view.text_account_first_name_user.text = jsonArray.getJSONObject(0).getString("first_name")

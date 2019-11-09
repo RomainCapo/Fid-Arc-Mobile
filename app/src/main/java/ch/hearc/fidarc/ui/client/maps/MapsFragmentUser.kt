@@ -23,9 +23,9 @@ import kotlinx.coroutines.*
 class MapsFragmentUser : Fragment(), OnMapReadyCallback{
 
     private lateinit var mMap: GoogleMap
-    private var currentUserMarker: Marker?=null
-    private var isUserLocated=false
-    private var client: FidarcAPIService = FidarcAPI.retrofitService
+    private var currentUserMarker: Marker?=null //contain the user location marker
+    private var isUserLocated=false // indicated if user is already located
+    private var client: FidarcAPIService = FidarcAPI.retrofitService // API object
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         var mapView = inflater.inflate(R.layout.fragment_maps_user, container, false)
@@ -35,11 +35,16 @@ class MapsFragmentUser : Fragment(), OnMapReadyCallback{
         return mapView
     }
 
-    private fun readCompaniesInformations(){
+    /**
+     * Read companies informations from de API and create marker for each company on the map
+     */
+    private fun readCompaniesInfo(){
 
         GlobalScope.launch(Dispatchers.IO) {
-            val companies = client.getCompaniesInfo().data
+            val companies = client.getCompaniesInfo().data // Read the data from the API
             activity?.runOnUiThread{
+
+                //For each company, we add a marker with the company name and company description
                 companies.forEach {
                     mMap.addMarker(
                         MarkerOptions().position(
@@ -54,18 +59,38 @@ class MapsFragmentUser : Fragment(), OnMapReadyCallback{
         }
     }
 
+    /**
+     * Place the user marker on the map
+     *
+     * @param latitude latitude of the user
+     * @param longitude longitude of the user
+     */
     private fun addUserLocation(latitude:Double, longitude:Double){
 
-        currentUserMarker?.remove()
+        currentUserMarker?.remove()// remove the old user marker
 
-        currentUserMarker = mMap.addMarker(MarkerOptions().position(LatLng(latitude,longitude)).icon(BitmapDescriptorFactory.fromResource(R.drawable.ic_navigation)))
+        //add the new user location marker
+        currentUserMarker = mMap.addMarker(
+            MarkerOptions().position(
+                LatLng(
+                    latitude,
+                    longitude)
+            ).icon(BitmapDescriptorFactory.fromResource(R.drawable.ic_navigation)))
     }
 
+    /**
+     * This method is call when the map is ready
+     *
+     * @param googleMap google map object
+     */
     override fun onMapReady(googleMap: GoogleMap) {
-        mMap = googleMap
+        mMap = googleMap //init the map
 
+        //Allow to know the user location
         Locus.startLocationUpdates(this) { result ->
             result.location?.let {
+
+                //move the camera on the user location for the first geolocation
                 if(!isUserLocated){
                     mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(LatLng(it.latitude,it.longitude), 10.0f))
                     isUserLocated=!isUserLocated
@@ -75,6 +100,6 @@ class MapsFragmentUser : Fragment(), OnMapReadyCallback{
             result.error?.let { Toast.makeText(context!!, "Error with the geolocation", Toast.LENGTH_SHORT) }
         }
 
-        readCompaniesInformations()
+        readCompaniesInfo()
         }
     }
