@@ -1,21 +1,32 @@
 package ch.hearc.fidarc.ui.data
 
-import ch.hearc.fidarc.ui.data.model.LoggedInUser
+import ch.hearc.fidarc.BuildConfig
+import ch.hearc.fidarc.ui.data.model.User
 import ch.hearc.fidarc.ui.network.FidarcAPI
 import java.io.IOException
-
-import android.util.Log
-import ch.hearc.fidarc.ui.network.FidarcAPIService
 
 /**
  * Class that handles authentication w/ login credentials and retrieves user information.
  */
 class LoginDataSource {
 
-    suspend fun login(username: String, password: String): Result<LoggedInUser> {
+    suspend fun login(username: String, password: String): Result<User> {
         try {
-            val fakeUser = LoggedInUser(java.util.UUID.randomUUID().toString(), "Jane Doe", "company", "test")
-            return Result.Success(fakeUser)
+            val response = FidarcAPI.retrofitService.login(username = username, password = password)
+            if(response.isSuccessful) {
+                val token = response.body()
+                val response =
+                    FidarcAPI.retrofitService.getUser(token?.token_type + " " + token?.access_token)
+
+                if (response.isSuccessful) {
+                    return Result.Success(response.body() as User)
+                }
+            }
+
+            return Result.Error(
+                IOException("Error getting details ${response.code()} ${response.message()}")
+            )
+
         } catch (e: Throwable) {
             return Result.Error(IOException("Error logging in", e))
         }
