@@ -50,11 +50,11 @@ class AccountFragmentUser : Fragment() {
 
         GlobalScope.launch(Dispatchers.Main) {
 
-            val fidelityCards = client.getFidelityCards().data // Read the data from the API
+            /*val fidelityCards = client.getFidelityCards().data // Read the data from the API
                 fidelityCards.forEach {
                     fidelityCardList.add(it)
             }
-            mAdapter?.notifyDataSetChanged()//update the adapter data
+            mAdapter?.notifyDataSetChanged()//update the adapter data*/
         }
 
         /*view.text_account_first_name_user.text = jsonArray.getJSONObject(0).getString("first_name")

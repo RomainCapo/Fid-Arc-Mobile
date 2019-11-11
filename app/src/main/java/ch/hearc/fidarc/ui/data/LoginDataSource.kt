@@ -1,5 +1,7 @@
 package ch.hearc.fidarc.ui.data
 
+import android.app.ActivityManager
+import android.content.Context
 import ch.hearc.fidarc.BuildConfig
 import ch.hearc.fidarc.ui.data.model.User
 import ch.hearc.fidarc.ui.network.FidarcAPI

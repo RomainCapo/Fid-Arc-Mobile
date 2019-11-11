@@ -32,7 +32,7 @@ interface FidarcAPIService {
     suspend fun getCompaniesInfo(): CompanyCollection
 
     @GET("/api/fidelityCards")
-    suspend fun getFidelityCards(): FidelityCardCollection
+    suspend fun getFidelityCards(@Header("authorization") token: String): FidelityCardCollection
 
     @GET("/api/user")
     suspend fun getUser(@Header("authorization") token: String): Response<User>

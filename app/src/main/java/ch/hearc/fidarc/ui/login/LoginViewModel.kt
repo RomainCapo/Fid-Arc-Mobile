@@ -43,6 +43,7 @@ class LoginViewModel(private val loginRepository: LoginRepository) : ViewModel()
                                 displayLastname = result.data.lastname
                             )
                         )
+
                 } else {
                     _loginResult.value = LoginResult(error = R.string.login_failed)
                     _loginForm.value = LoginFormState(passwordError = R.string.wrong_password)
