@@ -127,7 +127,7 @@ class LoginActivity : AppCompatActivity() {
     private fun storeUser(user: User, token: Token) {
         val sharedPref = getSharedPreferences("user", Context.MODE_PRIVATE) ?: return
         with(sharedPref.edit()) {
-            putInt("user_id", user.id)
+            putInt("id", user.id)
             putString("token", token.access_token)
             commit()
         }
