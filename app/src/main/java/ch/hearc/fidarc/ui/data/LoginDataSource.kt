@@ -1,7 +1,10 @@
 package ch.hearc.fidarc.ui.data
 
+import android.util.Log
 import ch.hearc.fidarc.BuildConfig
+import ch.hearc.fidarc.ui.data.model.Token
 import ch.hearc.fidarc.ui.data.model.User
+import ch.hearc.fidarc.ui.data.model.UserToken
 import ch.hearc.fidarc.ui.network.FidarcAPI
 import java.io.IOException
 
@@ -10,16 +13,18 @@ import java.io.IOException
  */
 class LoginDataSource {
 
-    suspend fun login(username: String, password: String): Result<User> {
+    suspend fun login(username: String, password: String): Result<UserToken> {
         try {
             val response = FidarcAPI.retrofitService.login(username = username, password = password)
             if(response.isSuccessful) {
                 val token = response.body()
+                Log.v("Fromage", token?.token_type + " " + token?.access_token)
                 val response =
                     FidarcAPI.retrofitService.getUser(token?.token_type + " " + token?.access_token)
 
                 if (response.isSuccessful) {
-                    return Result.Success(response.body() as User)
+                    val user = UserToken(response.body() as User, token as Token)
+                    return Result.Success(user)
                 }
             }
 
