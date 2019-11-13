@@ -39,8 +39,10 @@ class LoginViewModel(private val loginRepository: LoginRepository) : ViewModel()
                     _loginResult.value =
                         LoginResult(
                             success = LoggedInUserView(
-                                displayName = result.data.name,
-                                displayLastname = result.data.lastname
+                                user = result.data.user,
+                                token = result.data.token,
+                                displayName = result.data.user.name,
+                                displayLastname = result.data.user.lastname
                             )
                         )
                 } else {
