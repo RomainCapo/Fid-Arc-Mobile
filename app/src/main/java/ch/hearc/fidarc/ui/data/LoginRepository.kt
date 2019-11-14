@@ -1,7 +1,6 @@
 package ch.hearc.fidarc.ui.data
 
-import ch.hearc.fidarc.ui.data.model.Token
-import ch.hearc.fidarc.ui.data.model.User
+import ch.hearc.fidarc.ui.data.model.UserToken
 
 /**
  * Class that requests authentication and user information from the remote data source and
@@ -10,28 +9,25 @@ import ch.hearc.fidarc.ui.data.model.User
 
 class LoginRepository(val dataSource: LoginDataSource) {
 
-    var token: Token? = null
-        private set
-
     // in-memory cache of the loggedInUser object
-    var user: User? = null
+    var userToken: UserToken? = null
         private set
 
     val isLoggedIn: Boolean
-        get() = user != null
+        get() = userToken != null
 
     init {
         // If user credentials will be cached in local storage, it is recommended it be encrypted
         // @see https://developer.android.com/training/articles/keystore
-        user = null
+        userToken = null
     }
 
     fun logout() {
-        user = null
+        userToken = null
         dataSource.logout()
     }
 
-    suspend fun login(username: String, password: String): Result<User> {
+    suspend fun login(username: String, password: String): Result<UserToken> {
         // handle login
         val result = dataSource.login(username, password)
 
@@ -42,8 +38,8 @@ class LoginRepository(val dataSource: LoginDataSource) {
         return result
     }
 
-    private fun setLoggedInUser(loggedInUser: User) {
-        this.user = loggedInUser
+    private fun setLoggedInUser(loggedInUserToken: UserToken) {
+        this.userToken = loggedInUserToken
         // If user credentials will be cached in local storage, it is recommended it be encrypted
         // @see https://developer.android.com/training/articles/keystore
     }

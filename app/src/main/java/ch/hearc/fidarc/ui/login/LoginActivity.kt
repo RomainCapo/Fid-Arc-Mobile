@@ -2,6 +2,7 @@ package ch.hearc.fidarc.ui.login
 
 import android.app.Activity
 import android.app.LauncherActivity
+import android.content.Context
 import android.content.Intent
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
@@ -19,6 +20,12 @@ import android.widget.Toast
 import ch.hearc.fidarc.MainActivity
 
 import ch.hearc.fidarc.R
+import ch.hearc.fidarc.ui.data.model.Token
+import ch.hearc.fidarc.ui.data.model.User
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 
 class LoginActivity : AppCompatActivity() {
 
@@ -34,7 +41,8 @@ class LoginActivity : AppCompatActivity() {
         val login = findViewById<Button>(R.id.login)
         val loading = findViewById<ProgressBar>(R.id.loading)
 
-        loginViewModel = ViewModelProviders.of(this,
+        loginViewModel = ViewModelProviders.of(
+            this,
             LoginViewModelFactory()
         )
             .get(LoginViewModel::class.java)
@@ -61,6 +69,7 @@ class LoginActivity : AppCompatActivity() {
                 showLoginFailed(loginResult.error)
             }
             if (loginResult.success != null) {
+                GlobalScope.launch { storeUser(loginResult.success.user, loginResult.success.token) }
                 updateUiWithUser(loginResult.success)
                 setResult(Activity.RESULT_OK)
                 finish()
@@ -112,6 +121,18 @@ class LoginActivity : AppCompatActivity() {
 
     private fun showLoginFailed(@StringRes errorString: Int) {
         Toast.makeText(applicationContext, errorString, Toast.LENGTH_SHORT).show()
+    }
+
+    private fun storeUser(user: User, token: Token) {
+        val sharedPref = getSharedPreferences("user", Context.MODE_PRIVATE) ?: return
+        with(sharedPref.edit()) {
+            putInt("id", user.id)
+            putString("token", token.access_token)
+            putString("firstname", user.name)
+            putString("lastname", user.lastname)
+            putString("email", user.email)
+            commit()
+        }
     }
 }
 

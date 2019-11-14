@@ -24,6 +24,7 @@
     <string name="login_failed">"Login failed"</string>
     <string name="message_to_user">Message to user</string>
     <string name="text_qrCode_display">Please show this QRCode to our partner to get your fidelity point !</string>
+    <string name="register_text">You can create an account on <a href="https://fidarc.srvz-webapp.he-arc.ch/">FidArc Website</a></string>
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
