@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" >
+
+
+    <TextView
+        android:id="@+id/text_account_user"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/account_text"
+        android:textAlignment="center"
+        android:textSize="36sp"
+        android:textStyle="bold"
+        android:textColor="@color/colorPrimary"/>
+
+    <TextView
+        android:id="@+id/text_account_first_name_user"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:text="@string/text_first_name"
+        android:textAlignment="center"
+        android:textSize="22sp" />
+
+    <TextView
+        android:id="@+id/text_account_last_name_user"
+        android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        android:text="@string/text_last_name"
+        android:textSize="22sp"
+        android:layout_marginTop="10dp"
+        android:textAlignment="center"/>
+
+    <TextView
+        android:id="@+id/text_account_email_user"
+        android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        android:text="@string/text_email"
+        android:textSize="22sp"
+        android:layout_marginTop="10dp"
+        android:textAlignment="center"/>
+
+    <Button
+        android:id="@+id/button_account_log_out_user"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/text_log_out"
+        android:textAlignment="center"
+        android:layout_marginLeft="50dp"
+        android:layout_marginRight="50dp"
+        android:layout_marginTop="10dp"
+        android:textSize="18sp"/>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="3dp"
+        android:background="@android:color/black"
+        android:layout_marginTop="20dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"/>
+
+    <TextView
+        android:id="@+id/text_account_fidelity_cards"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/text_fidelity_cards"
+        android:textAlignment="center"
+        android:textSize="36sp"
+        android:textStyle="bold"
+        android:textColor="@color/colorPrimary"
+        android:layout_marginTop="10dp"/>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recycler_view_fidelity_cards"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+
+</LinearLayout>

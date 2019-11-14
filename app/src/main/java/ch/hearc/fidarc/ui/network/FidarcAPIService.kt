@@ -1,5 +1,8 @@
 package ch.hearc.fidarc.ui.network
 
+
+import ch.hearc.fidarc.ui.data.model.CompanyCollection
+import ch.hearc.fidarc.ui.data.model.FidelityCardCollection
 import ch.hearc.fidarc.BuildConfig
 import com.squareup.moshi.Moshi
 import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
@@ -23,6 +26,13 @@ private val retrofit = Retrofit.Builder()
     .build()
 
 interface FidarcAPIService {
+
+
+    @GET("/api/companies")
+    suspend fun getCompaniesInfo(): CompanyCollection
+
+    @GET("/api/fidelityCards")
+    suspend fun getFidelityCards(@Header("authorization") token: String): FidelityCardCollection
 
     @GET("/api/user")
     suspend fun getUser(@Header("authorization") token: String): Response<User>

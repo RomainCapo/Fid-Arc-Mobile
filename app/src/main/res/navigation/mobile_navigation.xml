@@ -3,24 +3,24 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/mobile_navigation"
-    app:startDestination="@+id/navigation_scan">
+    app:startDestination="@+id/navigation_account_user">
 
     <fragment
-        android:id="@+id/navigation_scan"
-        android:name="ch.hearc.fidarc.ui.scan.ScanFragment"
+        android:id="@+id/navigation_scan_user"
+        android:name="ch.hearc.fidarc.ui.client.scan.ScanFragmentUser"
         android:label="@string/title_scan"
-        tools:layout="@layout/fragment_scan" />
+        tools:layout="@layout/fragment_scan_user" />
 
     <fragment
-        android:id="@+id/navigation_maps"
-        android:name="ch.hearc.fidarc.ui.maps.MapsFragment"
+        android:id="@+id/navigation_maps_user"
+        android:name="ch.hearc.fidarc.ui.client.maps.MapsFragmentUser"
         android:label="@string/title_maps"
-        tools:layout="@layout/fragment_maps" />
+        tools:layout="@layout/fragment_maps_user" />
 
     <fragment
-        android:id="@+id/navigation_account"
-        android:name="ch.hearc.fidarc.ui.account.AccountFragment"
+        android:id="@+id/navigation_account_user"
+        android:name="ch.hearc.fidarc.ui.client.account.AccountFragmentUser"
         android:label="@string/title_account"
-        tools:layout="@layout/fragment_account" />
+        tools:layout="@layout/fragment_account_user" />
 
 </navigation>
