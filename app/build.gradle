@@ -53,7 +53,11 @@ dependencies {
     implementation "com.squareup.retrofit2:converter-moshi:$version_retrofit"
     implementation 'com.squareup.moshi:moshi:1.9.1'
     implementation 'com.squareup.moshi:moshi-kotlin:1.9.1'
+    implementation 'androidx.legacy:legacy-support-v4:1.0.0'
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'androidx.test:runner:1.2.0'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
+
+    implementation 'com.journeyapps:zxing-android-embedded:3.6.0'
+    implementation 'com.google.zxing:core:3.3.2'
 }

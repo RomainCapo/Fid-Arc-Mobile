@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/navigation_scan"
-        android:name="ch.hearc.fidarc.ui.scan.ScanFragment"
+        android:name="ch.hearc.fidarc.ui.company.scan.ScanCompanyFragment"
         android:label="@string/title_scan"
         tools:layout="@layout/fragment_scan" />
 
