@@ -24,6 +24,10 @@ private val retrofit = Retrofit.Builder()
 
 interface FidarcAPIService {
 
+    @FormUrlEncoded
+    @POST("/api/addFidelityPoint")
+    suspend fun addFidelityPoint(@Header("authorization") token: String, @Field("scanned_user_id") scanned_user_id: Int)
+
     @GET("/api/user")
     suspend fun getUser(@Header("authorization") token: String): Response<User>
 

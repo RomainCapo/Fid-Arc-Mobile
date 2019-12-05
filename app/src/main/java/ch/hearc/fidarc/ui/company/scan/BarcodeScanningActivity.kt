@@ -5,16 +5,23 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import android.content.Intent
 import android.app.Activity
+import android.content.Context
+import android.util.Log
+import ch.hearc.fidarc.ui.network.FidarcAPI
+import ch.hearc.fidarc.ui.network.FidarcAPIService
 import com.google.zxing.integration.android.IntentIntegrator
 import com.google.zxing.client.android.Intents.Scan.RESULT
-
-
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.launch
 
 class BarcodeScanningActivity : AppCompatActivity() {
 
+    private var client: FidarcAPIService = FidarcAPI.retrofitService
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        IntentIntegrator(this).initiateScan()
+        IntentIntegrator(this).setDesiredBarcodeFormats(IntentIntegrator.QR_CODE).initiateScan()
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, intent: Intent?) {
@@ -25,6 +32,14 @@ class BarcodeScanningActivity : AppCompatActivity() {
                 val contents = intent!!.getStringExtra(RESULT)
 
                 Toast.makeText(this, "contents : $contents", Toast.LENGTH_LONG).show()
+
+                val token = this!!.getSharedPreferences("user", Context.MODE_PRIVATE).getString("token", "-1")
+
+                Log.d("token_value", token.toString())
+
+                GlobalScope.launch(Dispatchers.Main) {
+                    client.addFidelityPoint("Bearer " + token!!, contents.toInt())
+                }
             }
         }
     }

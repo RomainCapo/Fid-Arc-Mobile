@@ -11,6 +11,4 @@ class ScanCompanyFragment : Fragment() {
         val myIntent = Intent(activity, BarcodeScanningActivity::class.java)
         activity!!.startActivity(myIntent)
     }
-
-
 }
