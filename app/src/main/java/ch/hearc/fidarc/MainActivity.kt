@@ -24,16 +24,10 @@ class MainActivity : AppCompatActivity() {
         // menu should be considered as top level destinations.
         val appBarConfiguration = AppBarConfiguration(
             setOf(
-                R.id.navigation_scan, R.id.navigation_maps, R.id.navigation_account
+                R.id.navigation_scan_user, R.id.navigation_maps_user, R.id.navigation_account_user
             )
         )
         setupActionBarWithNavController(navController, appBarConfiguration)
         navView.setupWithNavController(navController)
-
-        val sharedPref = getSharedPreferences("user", Context.MODE_PRIVATE) ?: return
-        val id = sharedPref.getInt("id", 0)
-        val token = sharedPref.getString("token", "error")
-
-        Toast.makeText(applicationContext, "ID: $id, Tok: $token", Toast.LENGTH_LONG).show()
     }
 }

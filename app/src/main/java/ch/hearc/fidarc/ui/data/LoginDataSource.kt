@@ -1,5 +1,7 @@
 package ch.hearc.fidarc.ui.data
 
+import android.app.ActivityManager
+import android.content.Context
 import android.util.Log
 import ch.hearc.fidarc.BuildConfig
 import ch.hearc.fidarc.ui.data.model.Token
@@ -18,7 +20,6 @@ class LoginDataSource {
             val response = FidarcAPI.retrofitService.login(username = username, password = password)
             if(response.isSuccessful) {
                 val token = response.body()
-                Log.v("Fromage", token?.token_type + " " + token?.access_token)
                 val response =
                     FidarcAPI.retrofitService.getUser(token?.token_type + " " + token?.access_token)
 

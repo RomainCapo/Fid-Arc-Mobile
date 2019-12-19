@@ -131,6 +131,10 @@ class LoginActivity : AppCompatActivity() {
         with(sharedPref.edit()) {
             putInt("id", user.id)
             putString("token", token.access_token)
+            putString("firstname", user.name)
+            putString("lastname", user.lastname)
+            putString("email", user.email)
+            putStringSet("roles", user.role_names.toSet())
             commit()
         }
     }
