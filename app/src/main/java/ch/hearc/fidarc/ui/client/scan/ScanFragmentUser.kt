@@ -1,5 +1,6 @@
 package ch.hearc.fidarc.ui.client.scan
 
+import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -30,11 +31,15 @@ class ScanFragmentUser : Fragment() {
 
         val root = inflater.inflate(R.layout.fragment_scan_user, container, false)
 
+        val sharedPref = activity!!.getSharedPreferences("user", Context.MODE_PRIVATE)
+        val userID = sharedPref.getInt("id", -1)
+
+
         val textView: TextView = root.findViewById(R.id.text_scan)
         textView.text = resources.getString(R.string.text_qrCode_display)
 
         GlobalScope.launch(Dispatchers.Default) {
-            bitmap = textToImageEncode("156")
+            bitmap = textToImageEncode(userID.toString())
             iv = root.findViewById(R.id.iv)
             withContext(Dispatchers.Main){
                 iv!!.setImageBitmap(bitmap)
@@ -46,6 +51,7 @@ class ScanFragmentUser : Fragment() {
 
     @Throws(WriterException::class)
     private fun textToImageEncode(Value: String): Bitmap? {
+
         val bitMatrix: BitMatrix
         try {
             bitMatrix = MultiFormatWriter().encode(Value, BarcodeFormat.QR_CODE, 800, 800, null)
