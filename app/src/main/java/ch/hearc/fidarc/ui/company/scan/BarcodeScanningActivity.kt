@@ -15,6 +15,7 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 
+
 class BarcodeScanningActivity : AppCompatActivity() {
 
     private var client: FidarcAPIService = FidarcAPI.retrofitService
@@ -31,7 +32,7 @@ class BarcodeScanningActivity : AppCompatActivity() {
             if (resultCode == Activity.RESULT_OK) {
                 val contents = intent!!.getStringExtra(RESULT)
 
-                Toast.makeText(this, "contents : $contents", Toast.LENGTH_LONG).show()
+                Toast.makeText(this, "The QRCode has been scanned", Toast.LENGTH_LONG).show()
 
                 val token = this!!.getSharedPreferences("user", Context.MODE_PRIVATE).getString("token", "-1")
 
@@ -40,6 +41,8 @@ class BarcodeScanningActivity : AppCompatActivity() {
                 GlobalScope.launch(Dispatchers.Main) {
                     client.addFidelityPoint("Bearer " + token!!, contents.toInt())
                 }
+
+                finish()
             }
         }
     }
