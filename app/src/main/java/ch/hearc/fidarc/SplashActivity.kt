@@ -9,13 +9,11 @@ import ch.hearc.fidarc.ui.login.LoginActivity
 
 class SplashActivity : AppCompatActivity() {
 
-    private val splashTime = 3000L
+    private val splashTime = 1000L
     private  lateinit var myHandler : Handler
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
-        Toast.makeText(this, "TEST", Toast.LENGTH_LONG)
 
         myHandler = Handler()
 
