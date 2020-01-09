@@ -1,7 +1,6 @@
 package ch.hearc.fidarc.ui.login
 
 import android.app.Activity
-import android.app.LauncherActivity
 import android.content.Context
 import android.content.Intent
 import androidx.lifecycle.Observer
@@ -11,22 +10,20 @@ import androidx.annotation.StringRes
 import androidx.appcompat.app.AppCompatActivity
 import android.text.Editable
 import android.text.TextWatcher
-import android.util.Log
 import android.view.View
 import android.view.inputmethod.EditorInfo
 import android.widget.Button
 import android.widget.EditText
 import android.widget.ProgressBar
 import android.widget.Toast
-import ch.hearc.fidarc.MainActivity
+import ch.hearc.fidarc.CompanyActivity
+import ch.hearc.fidarc.UserActivity
 
 import ch.hearc.fidarc.R
 import ch.hearc.fidarc.ui.data.model.Token
 import ch.hearc.fidarc.ui.data.model.User
-import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
 
 class LoginActivity : AppCompatActivity() {
 
@@ -118,7 +115,14 @@ class LoginActivity : AppCompatActivity() {
             "Login successful",
             Toast.LENGTH_LONG
         ).show()
-        val intent = Intent(this, MainActivity::class.java)
+
+        val intent: Intent
+        if(model.user.role_names.contains("company")) {
+            intent = Intent(this, CompanyActivity::class.java)
+        } else {
+            intent = Intent(this, UserActivity::class.java)
+        }
+
         startActivity(intent)
     }
 
