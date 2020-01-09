@@ -34,4 +34,5 @@
     <string name="text_number_of_point">Number of points</string>
     <string name="text_card_color">Card color</string>
     <string name="text_message_to_user">Message to user</string>
+    <string name="first_name_label">First name :</string>
 </resources>

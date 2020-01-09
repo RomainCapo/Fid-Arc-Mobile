@@ -1,7 +1,7 @@
 package ch.hearc.fidarc.ui.network
 
 
-import ch.hearc.fidarc.ui.data.model.CompanyCollection
+import ch.hearc.fidarc.ui.data.model.CompanyMapsCollection
 import ch.hearc.fidarc.ui.data.model.FidelityCardCollection
 import ch.hearc.fidarc.BuildConfig
 import com.squareup.moshi.Moshi
@@ -29,7 +29,7 @@ interface FidarcAPIService {
 
 
     @GET("/api/companies")
-    suspend fun getCompaniesInfo(): CompanyCollection
+    suspend fun getCompaniesInfo(): CompanyMapsCollection
 
     @GET("/api/fidelityCards")
     suspend fun getFidelityCards(@Header("authorization") token: String): FidelityCardCollection

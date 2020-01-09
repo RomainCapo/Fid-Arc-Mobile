@@ -13,32 +13,72 @@
         android:textStyle="bold"
         android:textColor="@color/colorPrimary"/>
 
-    <TextView
-        android:id="@+id/text_account_first_name_company"
-        android:layout_width="match_parent"
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
-        android:text="@string/text_first_name"
-        android:textAlignment="center"
-        android:textSize="22sp" />
+        android:layout_gravity="center">
+        <TextView
+            android:id="@+id/label_account_first_name_company"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:text="@string/first_name_label"
+            android:textSize="22sp"
+            android:textStyle="bold"/>
+        <TextView
+            android:id="@+id/text_account_first_name_company"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:text="@string/text_first_name"
+            android:textSize="22sp" />
+    </LinearLayout>
 
-    <TextView
-        android:id="@+id/text_account_last_name_company"
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_width="match_parent"
-        android:text="@string/text_last_name"
-        android:textSize="22sp"
-        android:layout_marginTop="10dp"
-        android:textAlignment="center"/>
+        android:layout_gravity="center">
+        <TextView
+            android:id="@+id/label_account_last_name_company"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:text="Last name : "
+            android:textSize="22sp"
+            android:textStyle="bold"/>
+        <TextView
+            android:id="@+id/text_account_last_name_company"
+            android:layout_height="wrap_content"
+            android:layout_width="wrap_content"
+            android:text="@string/text_last_name"
+            android:textSize="22sp"
+            android:layout_marginTop="10dp"/>
+    </LinearLayout>
 
-    <TextView
-        android:id="@+id/text_account_email_company"
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_width="match_parent"
-        android:text="@string/text_email"
-        android:textSize="22sp"
-        android:layout_marginTop="10dp"
-        android:textAlignment="center"/>
+        android:layout_gravity="center">
+        <TextView
+            android:id="@+id/label_account_email_company"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:text="Email : "
+            android:textSize="22sp"
+            android:textStyle="bold"/>
+        <TextView
+            android:id="@+id/text_account_email_company"
+            android:layout_height="wrap_content"
+            android:layout_width="wrap_content"
+            android:text="@string/text_email"
+            android:textSize="22sp"
+            android:layout_marginTop="10dp" />
+    </LinearLayout>
+
 
     <Button
         android:id="@+id/button_account_log_out_company"
