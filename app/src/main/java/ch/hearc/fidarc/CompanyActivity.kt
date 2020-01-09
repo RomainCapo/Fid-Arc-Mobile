@@ -24,7 +24,7 @@ class CompanyActivity : AppCompatActivity() {
         val appBarConfiguration = AppBarConfiguration(
             setOf(
                 R.id.navigation_scan_company,
-                R.id.navigation_account_company //TODO: Add account company
+                R.id.navigation_account_company
             )
         )
 

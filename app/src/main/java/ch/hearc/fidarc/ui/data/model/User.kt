@@ -8,5 +8,6 @@ data class User(
     val name: String,
     val lastname: String,
     val email: String,
-    val role_names: List<String>
+    val role_names: List<String>,
+    val company: Company
 )
