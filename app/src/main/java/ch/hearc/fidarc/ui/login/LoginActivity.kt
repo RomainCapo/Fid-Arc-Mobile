@@ -22,6 +22,8 @@ import ch.hearc.fidarc.UserActivity
 import ch.hearc.fidarc.R
 import ch.hearc.fidarc.ui.data.model.Token
 import ch.hearc.fidarc.ui.data.model.User
+import com.google.gson.Gson
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 
@@ -138,6 +140,11 @@ class LoginActivity : AppCompatActivity() {
             putString("firstname", user.name)
             putString("lastname", user.lastname)
             putString("email", user.email)
+
+            //Store the company in json in the shared preference
+            val gson = Gson()
+            putString("company", gson.toJson(user.company))
+
             putStringSet("roles", user.role_names.toSet())
             commit()
         }
