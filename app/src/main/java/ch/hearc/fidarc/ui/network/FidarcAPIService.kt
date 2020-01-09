@@ -34,18 +34,24 @@ interface FidarcAPIService {
     @GET("/api/fidelityCards")
     suspend fun getFidelityCards(@Header("authorization") token: String): FidelityCardCollection
 
+    @FormUrlEncoded
+    @POST("/api/addFidelityPoint")
+    suspend fun addFidelityPoint(@Header("authorization") token: String, @Field("scanned_user_id") scanned_user_id: Int): Response<Void>
+
     @GET("/api/user")
     suspend fun getUser(@Header("authorization") token: String): Response<User>
 
     @FormUrlEncoded
     @POST("/oauth/token")
-    suspend fun login(@Field("grant_type") grantType: String = "password",
-                      @Field("client_id") clientId: Int = 1,
-                      @Field("client_secret") clientSecret: String = BuildConfig.CLIENT_SECRET,
-                      @Field("username") username: String,
-                      @Field("password") password: String): Response<Token>
+    suspend fun login(
+        @Field("grant_type") grantType: String = "password",
+        @Field("client_id") clientId: Int = 1,
+        @Field("client_secret") clientSecret: String = BuildConfig.CLIENT_SECRET,
+        @Field("username") username: String,
+        @Field("password") password: String
+    ): Response<Token>
 }
 
 object FidarcAPI {
-    val retrofitService : FidarcAPIService by lazy { retrofit.create(FidarcAPIService::class.java) }
+    val retrofitService: FidarcAPIService by lazy { retrofit.create(FidarcAPIService::class.java) }
 }
