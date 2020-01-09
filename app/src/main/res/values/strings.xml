@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">FidArc</string>
+    <string name="app_name">fidarc</string>
     <string name="title_account">Account</string>
     <string name="title_maps">Maps</string>
     <string name="title_scan">Scan</string>
