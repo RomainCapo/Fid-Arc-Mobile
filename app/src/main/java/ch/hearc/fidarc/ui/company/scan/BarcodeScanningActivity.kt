@@ -23,7 +23,10 @@ class BarcodeScanningActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        IntentIntegrator(this).setDesiredBarcodeFormats(IntentIntegrator.QR_CODE).initiateScan()
+        val intentIntegrator = IntentIntegrator(this)
+        intentIntegrator.setOrientationLocked(false)
+        intentIntegrator.setDesiredBarcodeFormats(IntentIntegrator.QR_CODE)
+        intentIntegrator.initiateScan()
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, intent: Intent?) {
