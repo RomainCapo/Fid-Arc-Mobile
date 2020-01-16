@@ -74,11 +74,7 @@ class AccountFragmentUser : Fragment() {
 
 
         GlobalScope.launch(Dispatchers.Main) {
-
-
-
             val fidelityCards = client.getFidelityCards("Bearer " + token!!).data // Read the data from the API
-            Log.d("test", fidelityCards.toString())
             with(Dispatchers.Main) {
                 fidelityCards.forEach {
                     fidelityCardList.add(it)
