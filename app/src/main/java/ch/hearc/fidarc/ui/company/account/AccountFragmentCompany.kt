@@ -29,20 +29,21 @@ class AccountFragmentCompany : Fragment() {
 
         val sharedPref = activity!!.getSharedPreferences("user", Context.MODE_PRIVATE)
 
+        //Set the user information of the company
+        accountView.text_account_first_name_company.text = " ${sharedPref.getString("firstname", "firstname")}"
+        accountView.text_account_last_name_company.text = " ${sharedPref.getString("lastname", "lastname")}"
+        accountView.text_account_email_company.text = " ${sharedPref.getString("email", "email")}"
 
-        accountView.text_account_first_name_company.text = sharedPref.getString("firstname", "firstname")
-        accountView.text_account_last_name_company.text = sharedPref.getString("lastname", "lastname")
-        accountView.text_account_email_company.text = sharedPref.getString("email", "email")
-
+        //get the company object from JSON
         val gson = Gson()
         val json = sharedPref.getString("company", "-1")
-        val company = with(gson, { fromJson<Company>(json, Company::class.java!!) })
+        val company = with(gson, { fromJson<Company>(json, Company::class.java!!) })//Deserialize company object
 
-        accountView.text_account_name_company.text = company.company_name
-        accountView.text_account_description_company.text = company.company_description
-        accountView.text_number_of_fidelity_point_company.text = company.number_fidelity_points.toString()
-        accountView.text_card_color_company.text = company.card_color_id.toString()
-        accountView.text_message_to_user_company.text = company.message_to_user
+        //Set company information
+        accountView.text_account_name_company.text = " ${company.company_name}"
+        accountView.text_account_description_company.text = " ${company.company_description}"
+        accountView.text_number_of_fidelity_point_company.text = " ${company.number_fidelity_points}"
+        accountView.text_message_to_user_company.text = " ${company.message_to_user}"
 
         accountView.button_account_log_out_company.setOnClickListener {
             val loginRepository = LoginRepository(
