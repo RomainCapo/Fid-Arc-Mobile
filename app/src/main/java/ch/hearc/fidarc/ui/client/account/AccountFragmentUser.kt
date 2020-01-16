@@ -1,6 +1,7 @@
 package ch.hearc.fidarc.ui.client.account
 
 import android.content.Context
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -11,9 +12,13 @@ import androidx.recyclerview.widget.DefaultItemAnimator
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import ch.hearc.fidarc.R
+import ch.hearc.fidarc.ui.data.LoginDataSource
+import ch.hearc.fidarc.ui.data.LoginRepository
 import ch.hearc.fidarc.ui.data.model.FidelityCard
+import ch.hearc.fidarc.ui.login.LoginActivity
 import ch.hearc.fidarc.ui.network.FidarcAPI
 import ch.hearc.fidarc.ui.network.FidarcAPIService
+import kotlinx.android.synthetic.main.fragment_account_user.*
 import kotlinx.android.synthetic.main.fragment_account_user.view.*
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
@@ -40,6 +45,15 @@ class AccountFragmentUser : Fragment() {
         recyclerView?.adapter = mAdapter
 
         loadClientData(accountView)
+
+        accountView.button_account_log_out_user.setOnClickListener {
+            val loginRepository = LoginRepository(
+                dataSource = LoginDataSource()
+            )
+            loginRepository.logout(activity!!.baseContext)
+            startActivity(Intent(activity, LoginActivity::class.java))
+            activity?.finish()
+        }
 
         return accountView
     }

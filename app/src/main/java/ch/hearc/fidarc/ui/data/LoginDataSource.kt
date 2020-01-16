@@ -1,5 +1,6 @@
 package ch.hearc.fidarc.ui.data
 
+import android.content.Context
 import ch.hearc.fidarc.ui.data.model.Token
 import ch.hearc.fidarc.ui.data.model.User
 import ch.hearc.fidarc.ui.data.model.UserToken
@@ -11,6 +12,12 @@ import java.io.IOException
  */
 class LoginDataSource {
 
+    /**
+     * Login the current user with provided credentials
+     * @param username the username of the user
+     * @param password the password of the user
+     * @return The response of the server
+     */
     suspend fun login(username: String, password: String): Result<UserToken> {
         try {
             val response = FidarcAPI.retrofitService.login(username = username, password = password)
@@ -34,8 +41,12 @@ class LoginDataSource {
         }
     }
 
-    fun logout() {
-        // TODO: revoke authentication
+    /**
+     * Logout the current logged user
+     * @param context the context of the application
+     */
+    fun logout(context: Context) {
+        context.getSharedPreferences("user", Context.MODE_PRIVATE).edit().clear().apply()
     }
 }
 
