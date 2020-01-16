@@ -1,33 +1,36 @@
 package ch.hearc.fidarc.ui.client.scan
 
 import android.content.Context
+import android.graphics.Bitmap
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
 import android.widget.TextView
 import androidx.fragment.app.Fragment
 import ch.hearc.fidarc.R
-
-import android.graphics.Bitmap
-import android.widget.ImageView
 import com.google.zxing.BarcodeFormat
 import com.google.zxing.MultiFormatWriter
 import com.google.zxing.WriterException
 import com.google.zxing.common.BitMatrix
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.GlobalScope
-import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
-import java.util.concurrent.Executors
+import kotlinx.coroutines.*
+import java.lang.IllegalStateException
+
 
 class ScanFragmentUser : Fragment() {
 
 
     private var bitmap: Bitmap? = null
     private var iv: ImageView? = null
+    private val serviceJob = Job()
+    private val serviceScope = CoroutineScope(Dispatchers.Main + serviceJob)
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
 
         val root = inflater.inflate(R.layout.fragment_scan_user, container, false)
 
@@ -38,11 +41,13 @@ class ScanFragmentUser : Fragment() {
         val textView: TextView = root.findViewById(R.id.text_scan)
         textView.text = resources.getString(R.string.text_qrCode_display)
 
-        GlobalScope.launch(Dispatchers.Default) {
-            bitmap = textToImageEncode(userID.toString())
-            iv = root.findViewById(R.id.iv)
-            withContext(Dispatchers.Main){
-                iv!!.setImageBitmap(bitmap)
+        serviceScope.launch(Dispatchers.IO) {
+            if (isAdded) {
+                bitmap = textToImageEncode(userID.toString())
+                iv = root.findViewById(R.id.iv)
+                withContext(Dispatchers.Main) {
+                    iv!!.setImageBitmap(bitmap)
+                }
             }
         }
 
@@ -69,15 +74,24 @@ class ScanFragmentUser : Fragment() {
 
             for (x in 0 until bitMatrixWidth) {
 
-                pixels[offset + x] = if (bitMatrix.get(x, y))
-                    resources.getColor(R.color.green)
-                else
-                    resources.getColor(R.color.white)
+                if(isAdded) {
+                    pixels[offset + x] = if (bitMatrix.get(x, y))
+                        resources.getColor(R.color.green)
+                    else
+                        resources.getColor(R.color.white)
+                } else {
+                    return null
+                }
             }
         }
         val bitmap = Bitmap.createBitmap(bitMatrixWidth, bitMatrixHeight, Bitmap.Config.ARGB_4444)
 
         bitmap.setPixels(pixels, 0, 800, 0, 0, bitMatrixWidth, bitMatrixHeight)
         return bitmap
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        serviceJob.cancel()
     }
 }
