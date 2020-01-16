@@ -45,7 +45,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
-            android:text="Last name : "
+            android:text="@string/last_name_label"
             android:textSize="22sp"
             android:textStyle="bold"/>
         <TextView
@@ -67,7 +67,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
-            android:text="Email : "
+            android:text="@string/email_company_label"
             android:textSize="22sp"
             android:textStyle="bold"/>
         <TextView
@@ -110,42 +110,65 @@
         android:textColor="@color/colorPrimary"
         android:layout_marginTop="10dp"/>
 
-    <TextView
-        android:id="@+id/text_account_name_company"
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_width="match_parent"
-        android:text="@string/text_company_name"
-        android:textSize="22sp"
-        android:layout_marginTop="10dp"
-        android:textAlignment="center"/>
+        android:layout_gravity="center">
+        <TextView
+            android:id="@+id/label_account_name_company"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:text="@string/company_name_label"
+            android:textSize="22sp"
+            android:textStyle="bold"/>
+        <TextView
+            android:id="@+id/text_account_name_company"
+            android:layout_height="wrap_content"
+            android:layout_width="match_parent"
+            android:text="@string/text_company_name"
+            android:textSize="22sp"
+            android:layout_marginTop="10dp"
+            android:textAlignment="center"/>
+    </LinearLayout>
 
-    <TextView
-        android:id="@+id/text_account_description_company"
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_width="match_parent"
-        android:text="@string/text_company_description"
-        android:textSize="22sp"
-        android:layout_marginTop="10dp"
-        android:textAlignment="center"/>
+        android:layout_gravity="center">
+        <TextView
+            android:id="@+id/label_account_number_of_fidelity_point_company"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:text="@string/number_of_points_label"
+            android:textSize="22sp"
+            android:textStyle="bold"/>
+        <TextView
+            android:id="@+id/text_number_of_fidelity_point_company"
+            android:layout_height="wrap_content"
+            android:layout_width="match_parent"
+            android:text="@string/text_number_of_point"
+            android:textSize="22sp"
+            android:layout_marginTop="10dp"
+            android:textAlignment="center"/>
+    </LinearLayout>
 
-    <TextView
-        android:id="@+id/text_number_of_fidelity_point_company"
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_width="match_parent"
-        android:text="@string/text_number_of_point"
-        android:textSize="22sp"
-        android:layout_marginTop="10dp"
-        android:textAlignment="center"/>
-
-    <TextView
-        android:id="@+id/text_card_color_company"
-        android:layout_height="wrap_content"
-        android:layout_width="match_parent"
-        android:text="@string/text_card_color"
-        android:textSize="22sp"
-        android:layout_marginTop="10dp"
-        android:textAlignment="center"/>
-
+        android:layout_gravity="center">
+        <TextView
+            android:id="@+id/label_account_message_to_user_company"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:text="@string/message_to_user_label"
+            android:textSize="22sp"
+            android:textStyle="bold"/>
     <TextView
         android:id="@+id/text_message_to_user_company"
         android:layout_height="wrap_content"
@@ -154,5 +177,30 @@
         android:textSize="22sp"
         android:layout_marginTop="10dp"
         android:textAlignment="center"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center">
+        <TextView
+            android:id="@+id/label_account_description_company"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:text="@string/company_description_label"
+            android:textSize="22sp"
+            android:textStyle="bold"
+            android:layout_gravity="center"/>
+        <TextView
+            android:id="@+id/text_account_description_company"
+            android:layout_height="wrap_content"
+            android:layout_width="wrap_content"
+            android:text="@string/text_company_description"
+            android:textSize="22sp"
+            android:layout_marginTop="10dp"
+            android:textAlignment="center"/>
+    </LinearLayout>
 
 </LinearLayout>
