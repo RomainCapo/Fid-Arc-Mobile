@@ -46,36 +46,59 @@ class BarcodeScanningActivity : AppCompatActivity() {
 
                 GlobalScope.launch(Dispatchers.Main) {
                     //Make a request to the API to add fidelity point
+                    val id = contents?.toIntOrNull()
 
-                    val response = client.addFidelityPoint("Bearer " + token!!, contents!!.toInt())
+                    if (id != null) {
+                        val response = client.addFidelityPoint("Bearer " + token!!, id)
 
-                    //If response is successful, the point is add to the user
-                    if (response.isSuccessful) {
+                        //If response is successful, the point is add to the user
+                        if (response.isSuccessful) {
+                            Toast.makeText(
+                                this@BarcodeScanningActivity,
+                                "The number of has been incremented",
+                                Toast.LENGTH_LONG
+                            ).show()
+                            finish()//close activity
+                        } else {
+                            if (response.code() == 409) {
+                                // Initialize a new instance of
+                                val builder = AlertDialog.Builder(this@BarcodeScanningActivity)
+                                builder.setTitle("User reach maximum point")
+                                builder.setMessage("The user has reach the maximum point! Please give him his reward!")
+                                builder.setCancelable(false)
+
+                                // Set a positive button and its click listener on alert dialog
+                                builder.setPositiveButton("User got his reward") { dialog, which ->
+                                    //If the button is pressed, unlock user reward with an API request
+                                    GlobalScope.launch(Dispatchers.Main) {
+                                        client.userGotHisReward(
+                                            "Bearer " + token!!,
+                                            contents!!.toInt()
+                                        )
+                                    }
+                                    dialog.dismiss()//close the message box
+                                    finish()//close activity
+                                }
+
+                                dialog =
+                                    builder.create()// Finally, make the alert dialog using builder
+                                dialog.show()// Display the alert dialog on app interface
+                            } else {
+                                Toast.makeText(
+                                    this@BarcodeScanningActivity,
+                                    "The user doesn't exist",
+                                    Toast.LENGTH_LONG
+                                ).show()
+                                finish()
+                            }
+                        }
+                    } else {
                         Toast.makeText(
                             this@BarcodeScanningActivity,
-                            "The number of has been incremented",
+                            "The QR code is not valid",
                             Toast.LENGTH_LONG
                         ).show()
-                        finish()//close activity
-                    } else {
-                        // Initialize a new instance of
-                        val builder = AlertDialog.Builder(this@BarcodeScanningActivity)
-                        builder.setTitle("User reach maximum point")
-                        builder.setMessage("The user has reach the maximum point ! Please give him his reward !")
-                        builder.setCancelable(false)
-
-                        // Set a positive button and its click listener on alert dialog
-                        builder.setPositiveButton("User got his reward"){dialog, which ->
-                            //If the button is pressed, unlock user reward with an API request
-                            GlobalScope.launch(Dispatchers.Main) {
-                                client.userGotHisReward("Bearer " + token!!, contents!!.toInt())
-                            }
-                            dialog.dismiss()//close the message box
-                            finish()//close activity
-                        }
-
-                        dialog = builder.create()// Finally, make the alert dialog using builder
-                        dialog.show()// Display the alert dialog on app interface
+                        finish()
                     }
                 }
             }
