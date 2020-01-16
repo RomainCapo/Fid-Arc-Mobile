@@ -1,5 +1,6 @@
 package ch.hearc.fidarc.ui.data
 
+import android.content.Context
 import ch.hearc.fidarc.ui.data.model.UserToken
 
 /**
@@ -22,9 +23,9 @@ class LoginRepository(val dataSource: LoginDataSource) {
         userToken = null
     }
 
-    fun logout() {
+    fun logout(context: Context) {
         userToken = null
-        dataSource.logout()
+        dataSource.logout(context)
     }
 
     suspend fun login(username: String, password: String): Result<UserToken> {

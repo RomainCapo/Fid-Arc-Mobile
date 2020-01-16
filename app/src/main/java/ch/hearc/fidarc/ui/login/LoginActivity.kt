@@ -1,7 +1,6 @@
 package ch.hearc.fidarc.ui.login
 
 import android.app.Activity
-import android.app.LauncherActivity
 import android.content.Context
 import android.content.Intent
 import androidx.lifecycle.Observer
@@ -17,21 +16,24 @@ import android.widget.Button
 import android.widget.EditText
 import android.widget.ProgressBar
 import android.widget.Toast
-import ch.hearc.fidarc.MainActivity
+import ch.hearc.fidarc.CompanyActivity
+import ch.hearc.fidarc.UserActivity
 
 import ch.hearc.fidarc.R
 import ch.hearc.fidarc.ui.data.model.Token
 import ch.hearc.fidarc.ui.data.model.User
+import com.google.gson.Gson
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
 
 class LoginActivity : AppCompatActivity() {
 
     private lateinit var loginViewModel: LoginViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
+        setTheme(R.style.AppTheme)
+
         super.onCreate(savedInstanceState)
 
         setContentView(R.layout.activity_login)
@@ -115,7 +117,14 @@ class LoginActivity : AppCompatActivity() {
             "Login successful",
             Toast.LENGTH_LONG
         ).show()
-        val intent = Intent(this, MainActivity::class.java)
+
+        val intent: Intent
+        if(model.user.role_names.contains("company")) {
+            intent = Intent(this, CompanyActivity::class.java)
+        } else {
+            intent = Intent(this, UserActivity::class.java)
+        }
+
         startActivity(intent)
     }
 
@@ -131,6 +140,12 @@ class LoginActivity : AppCompatActivity() {
             putString("firstname", user.name)
             putString("lastname", user.lastname)
             putString("email", user.email)
+
+            //Store the company in json in the shared preference
+            val gson = Gson()
+            putString("company", gson.toJson(user.company))
+
+            putStringSet("roles", user.role_names.toSet())
             commit()
         }
     }

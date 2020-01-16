@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">FidArc</string>
+    <string name="app_name">fidarc</string>
     <string name="title_account">Account</string>
     <string name="title_maps">Maps</string>
     <string name="title_scan">Scan</string>
@@ -25,7 +25,20 @@
     <string name="message_to_user">Message to user</string>
     <string name="text_qrCode_display">Please show this QRCode to our partner to get your fidelity point !</string>
     <string name="register_text">You can create an account on <a href="https://fidarc.srvz-webapp.he-arc.ch/">FidArc Website</a></string>
-
-    <!-- TODO: Remove or change this placeholder text -->
+    <string name="title_activity_barcode_scanning">BarcodeScanningActivity</string>
+    <string name="title_activity_scan_company">ScanCompanyActivity</string>
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="text_company_information">Company information</string>
+    <string name="text_company_name">Company name</string>
+    <string name="text_company_description">Company description</string>
+    <string name="text_number_of_point">Number of points</string>
+    <string name="text_card_color">Card color</string>
+    <string name="text_message_to_user">Message to user</string>
+    <string name="first_name_label">First name : </string>
+    <string name="company_name_label">Name : </string>
+    <string name="company_description_label">Description : </string>
+    <string name="number_of_points_label">Number of points : </string>
+    <string name="message_to_user_label">Message to user : </string>
+    <string name="last_name_label">Last name : </string>
+    <string name="email_company_label">Email : </string>
 </resources>
