@@ -9,5 +9,5 @@ data class User(
     val lastname: String,
     val email: String,
     val role_names: List<String>,
-    val company: Company
+    val company: Company? = null
 )
