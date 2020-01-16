@@ -1,14 +1,17 @@
 package ch.hearc.fidarc.ui.company.account
 
 import android.content.Context
+import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import ch.hearc.fidarc.R
+import ch.hearc.fidarc.ui.data.LoginDataSource
+import ch.hearc.fidarc.ui.data.LoginRepository
 import ch.hearc.fidarc.ui.data.model.Company
+import ch.hearc.fidarc.ui.login.LoginActivity
 import ch.hearc.fidarc.ui.network.FidarcAPI
 import ch.hearc.fidarc.ui.network.FidarcAPIService
 import com.google.gson.Gson
@@ -41,6 +44,14 @@ class AccountFragmentCompany : Fragment() {
         accountView.text_card_color_company.text = company.card_color_id.toString()
         accountView.text_message_to_user_company.text = company.message_to_user
 
+        accountView.button_account_log_out_company.setOnClickListener {
+            val loginRepository = LoginRepository(
+                dataSource = LoginDataSource()
+            )
+            loginRepository.logout(activity!!.baseContext)
+            startActivity(Intent(activity, LoginActivity::class.java))
+            activity?.finish()
+        }
 
         return accountView
     }
